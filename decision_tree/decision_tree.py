@@ -24,9 +24,10 @@ def calcEntropy(dataset):
     labelCounts = {}
     for featVec in dataset:
         currentLabel = featVec[-1]
-        if currentLabel not in labelCounts.keys():
-            labelCounts[currentLabel] = 0
-        labelCounts[currentLabel] += 1
+        labelCounts[currentLabel] = labelCounts.get(currentLabel, 0) + 1
+#        if currentLabel not in labelCounts.keys():
+#            labelCounts[currentLabel] = 0
+#        labelCounts[currentLabel] += 1
     Entropy = 0.0
     for key in labelCounts.keys():
         prob = float(labelCounts[key])/numEntries
@@ -101,6 +102,7 @@ if __name__ == '__main__':
 #    print chooseBestFeature(data)
     label = copy(attr)
     myTree = createTree(data)
+    print myTree
     testdata = ['Sunny', 'Cool', 'Normal', 'Weak']
     classLabel = classify(myTree, label, testdata)
     print classLabel
